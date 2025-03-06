@@ -1,0 +1,736 @@
+show databases;
++------------------------------+
+| Database                     |
++------------------------------+
+| donovanflores17$Base         |
+| donovanflores17$FernandoBase |
+| donovanflores17$default      |
+| donovanflores17$donovanbase  |
+| information_schema           |
+| performance_schema           |
++------------------------------+
+6 rows in set (0.01 sec)
+
+mysql> use donovanflores17$default;
+Database changed
+mysql> show tables;
++-----------------------------------+
+| Tables_in_donovanflores17$default |
++-----------------------------------+
+| detalle_horario                   |
+| horario                           |
+| plantilla_detalle_horario         |
++-----------------------------------+
+3 rows in set (0.00 sec)
+
+mysql> CREATE TABLE PlayoffRound (
+    ->      id int(16) NOT NULL,
+    ->      team1id int(13) NOT NULL,
+    ->      team2id int(13) NOT NULL,
+    ->      startTime date NOT NULL,
+    ->      endTime date NOT NULL,
+    ->      roundNum int(14) NOT NULL,
+    ->      PRIMARY KEY (id,startTime)
+    ->  );
+Query OK, 0 rows affected, 4 warnings (0.04 sec)
+
+mysql> CREATE TABLE HockeyGame (
+    ->     id int(16) NOT NULL,
+    ->     roundId int(13) NOT NULL,
+    ->     startTime date NOT NULL,
+    ->     description text NOT NULL, 
+    ->     team1Id int(13) NOT NULL,
+    ->     team2Id int(13) NOT NULL,
+    ->     PRIMARY KEY (id, startTime)
+    -> );
+Query OK, 0 rows affected, 4 warnings (0.03 sec)
+
+mysql> 
+mysql> CREATE TABLE GameScores (
+    ->     id int(16) NOT NULL,
+    ->     team1Score int(14) NOT NULL,
+    ->     team2Score int(14) NOT NULL,
+    ->     PRIMARY KEY (id, team1Score)
+    -> 
+    -> );
+Query OK, 0 rows affected, 3 warnings (0.03 sec)
+
+mysql> 
+mysql> CREATE TABLE GameScores (
+    ->     id int(16) NOT NULL,
+    ->     team1Score int(14) NOT NULL,
+    ->     team2Score int(14) NOT NULL,
+    ->     PRIMARY KEY (id, team1Score)
+    -> 
+    ->     PRIMARY KEY (id, team1Score)
+
+^C
+mysql> CREATE TABLE RoundStats (
+    ->     id int(16) NOT NULL,
+    ->     numShutouts int(13) NOT NULL,
+    ->     goalLeaderId int(13) NOT NULL,
+    ->     assistLeaderId int(13) NOT NULL,
+    ->     penaltyLeaderId int(13) NOT NULL,
+    ->     plusMinusLeaderId int(13) NOT NULL,
+    ->     facesoffsWonLeaderId int(13) NOT NULL,
+    ->     sogLeaderId int(13) NOT NULL,
+    ->     PRIMARY KEY (id, numShutouts)
+    -> );
+Query OK, 0 rows affected, 8 warnings (0.02 sec)
+
+mysql> CREATE TABLE HockeyTeam (
+    ->     id int(16) NOT NULL,
+    ->     name varchar(25) NOT NULL,
+    ->     logo text(35) NOT NULL,
+    ->     PRIMARY KEY(id,name)
+    -> );
+Query OK, 0 rows affected, 1 warning (0.03 sec)
+
+mysql> CREATE TABLE HockeyTeamPlayer (
+    ->     id int(16) NOT NULL,
+    ->     hockeyTeamId int(13) NOT NULL,
+    ->     firtsName text(13) NOT NULL,
+    ->     lastName text(13) NOT NULL,
+    ->     jerseyNum int(13) NOT NULL,
+    ->     position varchar(16) NOT NULL,
+    ->     PRIMARY KEY(id, hockeyTeamId)
+    -> );
+Query OK, 0 rows affected, 3 warnings (0.03 sec)
+
+mysql> CREATE TABLE UserInfo (
+    ->     id int(16) NOT NULL,
+    ->     firtsName text(13) NOT NULL,
+    ->     lastName text(13) NOT NULL,
+    ->     email varchar(13) NOT NULL,
+    ->     round1Points int(13) NOT NULL,
+    ->     round2Points int(13) NOT NULL,
+    ->     round3Points int(13) NOT NULL,
+    ->     round4Points int(13) NOT NULL,
+    ->     PRIMARY KEY (id, email)
+    -> );
+Query OK, 0 rows affected, 5 warnings (0.03 sec)
+
+mysql> CREATE TABLE User (
+    ->     id int(16) NOT NULL,
+    ->     username varchar(13) NOT NULL,
+    ->     password varchar(13) NOT NULL,
+    ->     PRIMARY KEY(id, username)
+    -> );
+Query OK, 0 rows affected, 1 warning (0.02 sec)
+
+mysql> CREATE TABLE UserStatsPicks (
+    ->     id int(16) NOT NULL,
+    ->     roundId int(13) NOT NULL,
+    ->     goalLeaderId int(13) NOT NULL,
+    ->     assistLeaderId int(13) NOT NULL,
+    ->     penaltyLeaderId int(13) NOT NULL,
+    ->     plusMinusLeaderId int(13) NOT NULL,
+    ->     facesoffsWonLeaderId int(13) NOT NULL,
+    ->     sogLeaderId int(13) NOT NULL,
+    ->     numShutouts int(13) NOT NULL,
+    ->     userId int(13) NOT NULL,
+    ->     PRIMARY KEY (id, roundId)
+    -> );
+Query OK, 0 rows affected, 10 warnings (0.17 sec)
+
+mysql> CREATE TABLE UserScorePicks (
+    ->     id int(13) NOT NULL,
+    ->     HockeyGameId int(13) NOT NULL,
+    ->     team1Score int(13) NOT NULL,
+    ->     team2Score int(13) NOT NULL,
+    ->     UserId int(13) NOT NULL,
+    ->     PRIMARY KEY(id, HockeyGameId)
+    -> );
+Query OK, 0 rows affected, 5 warnings (0.03 sec)
+
+mysql> CREATE TABLE plantilla_detalle_horario (
+    ->   plantilla_id int(11) NOT NULL,
+    ->   dia int(11) NOT NULL,
+    ->   codigo_incapacidad varchar(25) DEFAULT NULL,
+    ->   turno varchar(25) DEFAULT NULL,
+    ->   PRIMARY KEY (plantilla_id, dia)
+    ->   PRIMARY KEY (plantilla_id, dia)^C
+
+^C
+mysql> CREATE TABLE usuarios
+    -> id int (11) NOT NULL
+    -> id int (11) NOT NULL
+    -> 
+
+^C
+mysql> CREATE TABLE usuarios (
+    -> id int (11) NOT NULL,
+    -> nombre varchar (25) NOT NULL,
+    -> 
+
+^C
+mysql> CREATE TABLE usuarios (
+    ->     -> id int (11) NOT NULL,
+    ->     -> nombre varchar (25) DEFAULT NULL,
+    -> apellido varchar (25) EFAULT NULL,
+    -> departamento (11) NOT NULL,
+    -> );
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '-> id int (11) NOT NULL,
+    -> nombre varchar (25) DEFAULT NULL,
+apellido varch' at line 2
+mysql> 
+
+^C
+mysql> SHOW TABLES;
++-----------------------------------+
+| Tables_in_donovanflores17$default |
++-----------------------------------+
+| GameScores                        |
+| HockeyGame                        |
+| HockeyTeam                        |
+| HockeyTeamPlayer                  |
+| PlayoffRound                      |
+| RoundStats                        |
+| User                              |
+| UserInfo                          |
+| UserScorePicks                    |
+| UserStatsPicks                    |
+| detalle_horario                   |
+| horario                           |
+| plantilla_detalle_horario         |
++-----------------------------------+
+13 rows in set (0.00 sec)
+
+mysql> DESC GameScores;
++------------+------+------+-----+---------+-------+
+| Field      | Type | Null | Key | Default | Extra |
++------------+------+------+-----+---------+-------+
+| id         | int  | NO   | PRI | NULL    |       |
+| team1Score | int  | NO   | PRI | NULL    |       |
+| team2Score | int  | NO   |     | NULL    |       |
++------------+------+------+-----+---------+-------+
+3 rows in set (0.01 sec)
+
+mysql> select * from horario;
++------------+--------------+
+| horario_id | plantilla_id |
++------------+--------------+
+|          1 |            5 |
+|          2 |            1 |
+|          3 |            3 |
+|          4 |            2 |
+|          5 |            4 |
++------------+--------------+
+5 rows in set (0.01 sec)
+
+mysql>  select * from  usuarios;
+ERROR 1146 (42S02): Table 'donovanflores17$default.usuarios' doesn't exist
+mysql>  select * from plantilla_detalle_horario;
++--------------+-----+--------------------+--------+
+| plantilla_id | dia | codigo_incapacidad | turno  |
++--------------+-----+--------------------+--------+
+|            1 |   1 | NULL               | 1/10   |
+|            1 |   2 | NULL               | 1/11,5 |
+|            1 |   3 | NULL               | 1/10   |
+|            1 |   4 | NULL               | 1/11,5 |
+|            1 |   5 | NULL               | 1/10   |
+|            1 |   6 | vacaciones         | NULL   |
+|            1 |   7 | vacaciones         | NULL   |
+|            2 |   1 | NULL               | 2/11,5 |
+|            2 |   2 | NULL               | 1/11,5 |
+|            2 |   3 | NULL               | 2/11,5 |
+|            2 |   4 | NULL               | 1|11.5 |
+|            2 |   5 | NULL               | 1/11,5 |
+|            2 |   6 | vacaciones         | NULL   |
+|            2 |   7 | vacaciones         | NULL   |
+|            3 |   1 | NULL               | 1#8    |
+|            3 |   2 | NULL               | 1.0    |
+|            3 |   3 | viaje_negocios     | NULL   |
++--------------+-----+--------------------+--------+
+17 rows in set (0.00 sec)
+
+mysql> select * from detalle_horario;
+Empty set (0.00 sec)
+
+mysql> select * from detalle_horario;
+Empty set (0.00 sec)
+
+mysql> SHOW TABLES;
++-----------------------------------+
+| Tables_in_donovanflores17$default |
++-----------------------------------+
+| GameScores                        |
+| HockeyGame                        |
+| HockeyTeam                        |
+| HockeyTeamPlayer                  |
+| PlayoffRound                      |
+| RoundStats                        |
+| User                              |
+| UserInfo                          |
+| UserScorePicks                    |
+| UserStatsPicks                    |
+| detalle_horario                   |
+| horario                           |
+| plantilla_detalle_horario         |
++-----------------------------------+
+13 rows in set (0.00 sec)
+
+mysql> DESC  GameScores;
++------------+------+------+-----+---------+-------+
+| Field      | Type | Null | Key | Default | Extra |
++------------+------+------+-----+---------+-------+
+| id         | int  | NO   | PRI | NULL    |       |
+| team1Score | int  | NO   | PRI | NULL    |       |
+| team2Score | int  | NO   |     | NULL    |       |
++------------+------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> Insert into GameScores (id,team1Score,team2Score) values ('10','11','12');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> desc  HockeyGame;
++-------------+------+------+-----+---------+-------+
+| Field       | Type | Null | Key | Default | Extra |
++-------------+------+------+-----+---------+-------+
+| id          | int  | NO   | PRI | NULL    |       |
+| roundId     | int  | NO   |     | NULL    |       |
+| startTime   | date | NO   | PRI | NULL    |       |
+| description | text | NO   |     | NULL    |       |
+| team1Id     | int  | NO   |     | NULL    |       |
+| team2Id     | int  | NO   |     | NULL    |       |
++-------------+------+------+-----+---------+-------+
+6 rows in set (0.00 sec)
+
+mysql> insert into  HockeyGame (id,roundId,startTime,description,team1Id,team2Id) values ('13','14','2026/08/29','ARATHCITO','15','16');
+Query OK, 1 row affected, 1 warning (0.00 sec)
+
+mysql> desc HockeyTeam;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| id    | int         | NO   | PRI | NULL    |       |
+| name  | varchar(25) | NO   | PRI | NULL    |       |
+| logo  | tinytext    | NO   |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> insert into HockeyTeam (id,name,logo) values ('17','text','text');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> desc HockeyTeamPlayer;
++--------------+-------------+------+-----+---------+-------+
+| Field        | Type        | Null | Key | Default | Extra |
++--------------+-------------+------+-----+---------+-------+
+| id           | int         | NO   | PRI | NULL    |       |
+| hockeyTeamId | int         | NO   | PRI | NULL    |       |
+| firtsName    | tinytext    | NO   |     | NULL    |       |
+| lastName     | tinytext    | NO   |     | NULL    |       |
+| jerseyNum    | int         | NO   |     | NULL    |       |
+| position     | varchar(16) | NO   |     | NULL    |       |
++--------------+-------------+------+-----+---------+-------+
+6 rows in set (0.01 sec)
+
+mysql> insert into HockeyTeamPlayer (id,hockeyTeamId,firtsName,lastName,jerseyNum,position) values ('17','18','text','text','19','text');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> desc PlayoffRound;
++-----------+------+------+-----+---------+-------+
+| Field     | Type | Null | Key | Default | Extra |
++-----------+------+------+-----+---------+-------+
+| id        | int  | NO   | PRI | NULL    |       |
+| team1id   | int  | NO   |     | NULL    |       |
+| team2id   | int  | NO   |     | NULL    |       |
+| startTime | date | NO   | PRI | NULL    |       |
+| endTime   | date | NO   |     | NULL    |       |
+| roundNum  | int  | NO   |     | NULL    |       |
++-----------+------+------+-----+---------+-------+
+6 rows in set (0.00 sec)
+
+mysql>  insert into PlayoffRound (id,team1id,team2id,startTime,endTime,roundNum) values ('20','21','22','2026/07/30','2025/06/19','23')
+    -> ;
+Query OK, 1 row affected, 2 warnings (0.01 sec)
+
+mysql> desc  RoundStats;
++----------------------+------+------+-----+---------+-------+
+| Field                | Type | Null | Key | Default | Extra |
++----------------------+------+------+-----+---------+-------+
+| id                   | int  | NO   | PRI | NULL    |       |
+| numShutouts          | int  | NO   | PRI | NULL    |       |
+| goalLeaderId         | int  | NO   |     | NULL    |       |
+| assistLeaderId       | int  | NO   |     | NULL    |       |
+| penaltyLeaderId      | int  | NO   |     | NULL    |       |
+| plusMinusLeaderId    | int  | NO   |     | NULL    |       |
+| facesoffsWonLeaderId | int  | NO   |     | NULL    |       |
+| sogLeaderId          | int  | NO   |     | NULL    |       |
++----------------------+------+------+-----+---------+-------+
+8 rows in set (0.00 sec)
+
+mysql> insert into RoundStats(id,numShutouts,goalLeaderId,assistLeaderId,penaltyLeaderId,plusMinusLeaderId,facesoffsWonLeaderId,sogLeaderId) values ('24','25','26','27','28','29','30','31');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> desc User;
++----------+-------------+------+-----+---------+-------+
+| Field    | Type        | Null | Key | Default | Extra |
++----------+-------------+------+-----+---------+-------+
+| id       | int         | NO   | PRI | NULL    |       |
+| username | varchar(13) | NO   | PRI | NULL    |       |
+| password | varchar(13) | NO   |     | NULL    |       |
++----------+-------------+------+-----+---------+-------+
+3 rows in set (0.01 sec)
+
+mysql> insert into User (id,username,password) values ('32','text','text');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> desc UserInfo;
++--------------+-------------+------+-----+---------+-------+
+| Field        | Type        | Null | Key | Default | Extra |
++--------------+-------------+------+-----+---------+-------+
+| id           | int         | NO   | PRI | NULL    |       |
+| firtsName    | tinytext    | NO   |     | NULL    |       |
+| lastName     | tinytext    | NO   |     | NULL    |       |
+| email        | varchar(13) | NO   | PRI | NULL    |       |
+| round1Points | int         | NO   |     | NULL    |       |
+| round2Points | int         | NO   |     | NULL    |       |
+| round3Points | int         | NO   |     | NULL    |       |
+| round4Points | int         | NO   |     | NULL    |       |
++--------------+-------------+------+-----+---------+-------+
+8 rows in set (0.00 sec)
+
+mysql> insert into UserInfo(id,firtsName,lastName,email,round1Points,round2Points,round3Points,round4Points) values ('33','text','text','t
+ext','33','34','35','36');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> desc UserScorePicks;
++--------------+------+------+-----+---------+-------+
+| Field        | Type | Null | Key | Default | Extra |
++--------------+------+------+-----+---------+-------+
+| id           | int  | NO   | PRI | NULL    |       |
+| HockeyGameId | int  | NO   | PRI | NULL    |       |
+| team1Score   | int  | NO   |     | NULL    |       |
+| team2Score   | int  | NO   |     | NULL    |       |
+| UserId       | int  | NO   |     | NULL    |       |
++--------------+------+------+-----+---------+-------+
+5 rows in set (0.00 sec)
+
+mysql> insert into UserScorePicks (id,HockeyGameId,team1Score,team2Score,UserId) values ('37','38','39','40','41');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> desc UserStatsPicks;
++----------------------+------+------+-----+---------+-------+
+| Field                | Type | Null | Key | Default | Extra |
++----------------------+------+------+-----+---------+-------+
+| id                   | int  | NO   | PRI | NULL    |       |
+| roundId              | int  | NO   | PRI | NULL    |       |
+| goalLeaderId         | int  | NO   |     | NULL    |       |
+| assistLeaderId       | int  | NO   |     | NULL    |       |
+| penaltyLeaderId      | int  | NO   |     | NULL    |       |
+| plusMinusLeaderId    | int  | NO   |     | NULL    |       |
+| facesoffsWonLeaderId | int  | NO   |     | NULL    |       |
+| sogLeaderId          | int  | NO   |     | NULL    |       |
+| numShutouts          | int  | NO   |     | NULL    |       |
+| userId               | int  | NO   |     | NULL    |       |
++----------------------+------+------+-----+---------+-------+
+10 rows in set (0.00 sec)
+
+mysql> insert UserStatsPicks (id,roundId,goalLeaderId,assistLeaderId,penaltyLeaderId,plusMinusLeaderId,facesoffsWonLeaderId,sogLeaderId,numShutouts,userId) values ('42','43','44','45','46','47','48','49','50','51');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> show tables;
++-----------------------------------+
+| Tables_in_donovanflores17$default |
++-----------------------------------+
+| GameScores                        |
+| HockeyGame                        |
+| HockeyTeam                        |
+| HockeyTeamPlayer                  |
+| PlayoffRound                      |
+| RoundStats                        |
+| User                              |
+| UserInfo                          |
+| UserScorePicks                    |
+| UserStatsPicks                    |
+| detalle_horario                   |
+| horario                           |
+| plantilla_detalle_horario         |
++-----------------------------------+
+13 rows in set (0.00 sec)
+
+mysql>  select * from  GameScores;
++----+------------+------------+
+| id | team1Score | team2Score |
++----+------------+------------+
+| 10 |         11 |         12 |
++----+------------+------------+
+1 row in set (0.00 sec)
+
+mysql> select * from HockeyGame;
++----+---------+------------+-------------+---------+---------+
+| id | roundId | startTime  | description | team1Id | team2Id |
++----+---------+------------+-------------+---------+---------+
+| 13 |      14 | 2026-08-29 | ARATHCITO   |      15 |      16 |
++----+---------+------------+-------------+---------+---------+
+1 row in set (0.00 sec)
+
+mysql> select * from HockeyTeam;
++----+------+------+
+| id | name | logo |
++----+------+------+
+| 17 | text | text |
++----+------+------+
+1 row in set (0.00 sec)
+
+mysql> select * from  HockeyTeamPlayer;
++----+--------------+-----------+----------+-----------+----------+
+| id | hockeyTeamId | firtsName | lastName | jerseyNum | position |
++----+--------------+-----------+----------+-----------+----------+
+| 17 |           18 | text      | text     |        19 | text     |
++----+--------------+-----------+----------+-----------+----------+
+1 row in set (0.00 sec)
+
+mysql>  select * from PlayoffRound;
++----+---------+---------+------------+------------+----------+
+| id | team1id | team2id | startTime  | endTime    | roundNum |
++----+---------+---------+------------+------------+----------+
+| 20 |      21 |      22 | 2026-07-30 | 2025-06-19 |       23 |
++----+---------+---------+------------+------------+----------+
+1 row in set (0.00 sec)
+
+mysql> select * from User;
++----+----------+----------+
+| id | username | password |
++----+----------+----------+
+| 32 | text     | text     |
++----+----------+----------+
+1 row in set (0.00 sec)
+
+mysql> select * from UserInfo;
++----+-----------+----------+-------+--------------+--------------+--------------+--------------+
+| id | firtsName | lastName | email | round1Points | round2Points | round3Points | round4Points |
++----+-----------+----------+-------+--------------+--------------+--------------+--------------+
+| 33 | text      | text     | text  |           33 |           34 |           35 |           36 |
++----+-----------+----------+-------+--------------+--------------+--------------+--------------+
+1 row in set (0.00 sec)
+
+mysql> select * from UserScorePicks;
++----+--------------+------------+------------+--------+
+| id | HockeyGameId | team1Score | team2Score | UserId |
++----+--------------+------------+------------+--------+
+| 37 |           38 |         39 |         40 |     41 |
++----+--------------+------------+------------+--------+
+1 row in set (0.00 sec)
+
+mysql> select * from UserStatsPicks;
++----+---------+--------------+----------------+-----------------+-------------------+----------------------+-------------+-------------+--------+
+| id | roundId | goalLeaderId | assistLeaderId | penaltyLeaderId | plusMinusLeaderId | facesoffsWonLeaderId | sogLeaderId | numShutouts | userId |
++----+---------+--------------+----------------+-----------------+-------------------+----------------------+-------------+-------------+--------+
+| 42 |      43 |           44 |             45 |              46 |                47 |                   48 |          49 |          50 |     51 |
++----+---------+--------------+----------------+-----------------+-------------------+----------------------+-------------+-------------+--------+
+1 row in set (0.00 sec)
+
+mysql> show create table GameScores;
++------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Table      | Create Table                                                                                                                                                                         |
++------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| GameScores | CREATE TABLE `GameScores` (
+  `id` int NOT NULL,
+  `team1Score` int NOT NULL,
+  `team2Score` int NOT NULL,
+  PRIMARY KEY (`id`,`team1Score`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 |
++------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+1 row in set (0.01 sec)
+
+mysql> show create table  HockeyGame;
++------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Table      | Create Table                                                                                                                                                                                                                                                        |
++------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| HockeyGame | CREATE TABLE `HockeyGame` (
+  `id` int NOT NULL,
+  `roundId` int NOT NULL,
+  `startTime` date NOT NULL,
+  `description` text NOT NULL,
+  `team1Id` int NOT NULL,
+  `team2Id` int NOT NULL,
+  PRIMARY KEY (`id`,`startTime`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 |
++------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+1 row in set (0.00 sec)
+
+mysql> show create table HockeyTeam;
++------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Table      | Create Table                                                                                                                                                                    |
++------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| HockeyTeam | CREATE TABLE `HockeyTeam` (
+  `id` int NOT NULL,
+  `name` varchar(25) NOT NULL,
+  `logo` tinytext NOT NULL,
+  PRIMARY KEY (`id`,`name`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 |
++------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+1 row in set (0.00 sec)
+
+mysql> show create table  HockeyTeamPlayer;
++------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Table            | Create Table                                                                                                                                                                                                                                                                                      |
++------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| HockeyTeamPlayer | CREATE TABLE `HockeyTeamPlayer` (
+  `id` int NOT NULL,
+  `hockeyTeamId` int NOT NULL,
+  `firtsName` tinytext NOT NULL,
+  `lastName` tinytext NOT NULL,
+  `jerseyNum` int NOT NULL,
+  `position` varchar(16) NOT NULL,
+  PRIMARY KEY (`id`,`hockeyTeamId`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 |
++------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+1 row in set (0.00 sec)
+
+mysql> show create table PlayoffRound;
++--------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Table        | Create Table                                                                                                                                                                                                                                                       |
++--------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| PlayoffRound | CREATE TABLE `PlayoffRound` (
+  `id` int NOT NULL,
+  `team1id` int NOT NULL,
+  `team2id` int NOT NULL,
+  `startTime` date NOT NULL,
+  `endTime` date NOT NULL,
+  `roundNum` int NOT NULL,
+  PRIMARY KEY (`id`,`startTime`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 |
++--------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+1 row in set (0.00 sec)
+
+mysql> show create table RoundStats;
++------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Table      | Create Table                                                                                                                                                                                                                                                                                                                                                         |
++------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| RoundStats | CREATE TABLE `RoundStats` (
+  `id` int NOT NULL,
+  `numShutouts` int NOT NULL,
+  `goalLeaderId` int NOT NULL,
+  `assistLeaderId` int NOT NULL,
+  `penaltyLeaderId` int NOT NULL,
+  `plusMinusLeaderId` int NOT NULL,
+  `facesoffsWonLeaderId` int NOT NULL,
+  `sogLeaderId` int NOT NULL,
+  PRIMARY KEY (`id`,`numShutouts`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 |
++------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+1 row in set (0.00 sec)
+
+mysql> show create table UserInfo;
++----------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Table    | Create Table                                                                                                                                                                                                                                                                                                                                     |
++----------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| UserInfo | CREATE TABLE `UserInfo` (
+  `id` int NOT NULL,
+  `firtsName` tinytext NOT NULL,
+  `lastName` tinytext NOT NULL,
+  `email` varchar(13) NOT NULL,
+  `round1Points` int NOT NULL,
+  `round2Points` int NOT NULL,
+  `round3Points` int NOT NULL,
+  `round4Points` int NOT NULL,
+  PRIMARY KEY (`id`,`email`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 |
++----------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+1 row in set (0.00 sec)
+
+mysql> show create table UserScorePicks;
++----------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Table          | Create Table                                                                                                                                                                                                                                       |
++----------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| UserScorePicks | CREATE TABLE `UserScorePicks` (
+  `id` int NOT NULL,
+  `HockeyGameId` int NOT NULL,
+  `team1Score` int NOT NULL,
+  `team2Score` int NOT NULL,
+  `UserId` int NOT NULL,
+  PRIMARY KEY (`id`,`HockeyGameId`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 |
++----------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+1 row in set (0.00 sec)
+
+mysql> show create table  UserScorePicks;
++----------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Table          | Create Table                                                                                                                                                                                                                                       |
++----------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| UserScorePicks | CREATE TABLE `UserScorePicks` (
+  `id` int NOT NULL,
+  `HockeyGameId` int NOT NULL,
+  `team1Score` int NOT NULL,
+  `team2Score` int NOT NULL,
+  `UserId` int NOT NULL,
+  PRIMARY KEY (`id`,`HockeyGameId`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 |
++----------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+1 row in set (0.00 sec)
+
+mysql> show create table UserStatsPicks;
++----------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Table          | Create Table                                                                                                                                                                                                                                                                                                                                                                                                            |
++----------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| UserStatsPicks | CREATE TABLE `UserStatsPicks` (
+  `id` int NOT NULL,
+  `roundId` int NOT NULL,
+  `goalLeaderId` int NOT NULL,
+  `assistLeaderId` int NOT NULL,
+  `penaltyLeaderId` int NOT NULL,
+  `plusMinusLeaderId` int NOT NULL,
+  `facesoffsWonLeaderId` int NOT NULL,
+  `sogLeaderId` int NOT NULL,
+  `numShutouts` int NOT NULL,
+  `userId` int NOT NULL,
+  PRIMARY KEY (`id`,`roundId`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 |
++----------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+1 row in set (0.00 sec)
+
+mysql> show create table  detalle_horario;
++-----------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Table           | Create Table                                                                                                                                                                                                                                                     |
++-----------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| detalle_horario | CREATE TABLE `detalle_horario` (
+  `horario_id` int NOT NULL,
+  `hora_salida` date NOT NULL,
+  `hora_entrada` date NOT NULL,
+  `codigo_incapacidad` varchar(25) DEFAULT NULL,
+  PRIMARY KEY (`horario_id`,`hora_salida`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 |
++-----------------+-----------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------------------------
+-+
+1 row in set (0.00 sec)
+mysql>  show create table horario;
++---------+-------------------------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------+
+| Table   | Create Table                                                                                                                  
+                                                                |
++---------+-------------------------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------+
+| horario | CREATE TABLE `horario` (
+  `horario_id` int NOT NULL AUTO_INCREMENT,
+  `plantilla_id` int DEFAULT NULL,
+  PRIMARY KEY (`horario_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb3 |
++---------+-------------------------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------+
+1 row in set (0.00 sec)
+mysql> show create table plantilla_detalle_horario;
++---------------------------+-------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------------------------
+------------+
+| Table                     | Create Table                                                                                                
+                                                                                                                                          
+            |
++---------------------------+-------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------------------------
+------------+
+| plantilla_detalle_horario | CREATE TABLE `plantilla_detalle_horario` (
+  `plantilla_id` int NOT NULL,
+  `dia` int NOT NULL,
+  `codigo_incapacidad` varchar(25) DEFAULT NULL,
+  `turno` varchar(25) DEFAULT NULL,
+  PRIMARY KEY (`plantilla_id`,`dia`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 |
++---------------------------+-------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------------------------
+------------+
+1 row in set (0.00 sec)
+
