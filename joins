@@ -1,0 +1,242 @@
+SHOW DATABASES;
++------------------------------+
+| Database                     |
++------------------------------+
+| donovanflores17$Base         |
+| donovanflores17$FernandoBase |
+| donovanflores17$Join         |
+| donovanflores17$default      |
+| donovanflores17$donovanbase  |
+| information_schema           |
+| performance_schema           |
++------------------------------+
+7 rows in set (0.01 sec)
+mysql> USE donovanflores17$Join;
+Database changed
+mysql> show tables;
+Empty set (0.00 sec)
+mysql> CREATE TABLE BOOKS (
+    -> ID INT NOT NULL,
+    -> NAME VARCHAR(50) NOT NULL,
+    -> PRICE INT NOT NULL,
+    -> CATEGORYID INT NOT NULL,
+    -> AUTHORID INT NOT NULL,
+    -> PRIMARY KEY(ID, NAME)
+    -> );
+Query OK, 0 rows affected (0.03 sec)
+mysql> CREATE TABLE CATEGORIES(
+    -> ID INT NOT NULL,
+    -> NAME VARCHAR(50) NOT NULL,
+    -> PRIMARY KEY(ID, NAME)
+    -> );
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> 
+mysql> CREATE TABLE AUTHORS (
+    -> ID INT NOT NULL,
+    -> NAME VARCHAR(50) NOT NULL,
+    -> PRIMARY KEY(ID, NAME)
+    -> );
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> INSERT INTO
+    -> CATEGORIES
+    -> VALUES
+    -> (1, 'Cat-A'),
+    -> (2, 'Cat-B'),
+    -> (3, 'Cat-C'),
+    -> (7, 'Cat-D'),
+    -> (8, 'Cat-E'),
+    -> (4, 'Cat-F'),
+    -> (10, 'Cat-G'),
+    -> (12, 'Cat-H'),
+    -> (6, 'Cat-I');
+Query OK, 9 rows affected (0.00 sec)
+Records: 9  Duplicates: 0  Warnings: 0
+
+mysql> INSERT INTO
+    -> AUTHORS
+    -> VALUES
+    -> (1, 'Author-A'),
+    -> (2, 'Author-B'),
+    -> (3, 'Author-C'),
+    -> (10, 'Author-D'),
+    -> (12, 'Author-E');
+Query OK, 5 rows affected (0.01 sec)
+Records: 5  Duplicates: 0  Warnings: 0
+
+mysql> INSERT INTO
+    -> BOOKS
+    -> VALUES
+    -> (1,'Book-A', 100, 1, 2),
+    -> (2,'Book-B', 200, 2, 2),
+    -> (3,'Book-C', 150, 3, 2),
+    -> (4,'Book-D', 100, 3, 1),
+    -> (5,'Book-E', 200, 3, 1),
+    -> (6,'Book-F', 150, 4, 1),
+    -> (7,'Book-G', 100, 5, 5),
+    -> (8,'Book-H', 200, 5, 6),
+    -> (9,'Book-I', 150, 7, 8);
+Query OK, 9 rows affected (0.00 sec)
+Records: 9  Duplicates: 0  Warnings: 0
+
+mysql> show tables;
++--------------------------------+
+| Tables_in_donovanflores17$Join |
++--------------------------------+
+| AUTHORS                        |
+| BOOKS                          |
+| CATEGORIES                     |
++--------------------------------+
+3 rows in set (0.01 sec)
+
+mysql> DESC BOOKS;
++------------+-------------+------+-----+---------+-------+
+| Field      | Type        | Null | Key | Default | Extra |
++------------+-------------+------+-----+---------+-------+
+| ID         | int         | NO   | PRI | NULL    |       |
+| NAME       | varchar(50) | NO   | PRI | NULL    |       |
+| PRICE      | int         | NO   |     | NULL    |       |
+| CATEGORYID | int         | NO   |     | NULL    |       |
+| AUTHORID   | int         | NO   |     | NULL    |       |
++------------+-------------+------+-----+---------+-------+
+5 rows in set (0.01 sec)
+
+mysql> SELECT * FROM BOOKS;
++----+--------+-------+------------+----------+
+| ID | NAME   | PRICE | CATEGORYID | AUTHORID |
++----+--------+-------+------------+----------+
+|  1 | Book-A |   100 |          1 |        2 |
+|  2 | Book-B |   200 |          2 |        2 |
+|  3 | Book-C |   150 |          3 |        2 |
+|  4 | Book-D |   100 |          3 |        1 |
+|  5 | Book-E |   200 |          3 |        1 |
+|  6 | Book-F |   150 |          4 |        1 |
+|  7 | Book-G |   100 |          5 |        5 |
+|  8 | Book-H |   200 |          5 |        6 |
+|  9 | Book-I |   150 |          7 |        8 |
++----+--------+-------+------------+----------+
+9 rows in set (0.00 sec)
+
+mysql>  SELECT * FROM AUTHORS INNER JOIN BOOKS ON AUTHORS.name=BOOKS.name;
+Empty set (0.01 sec)
+
+mysql>  SELECT * FROM AUTHORS;
++----+----------+
+| ID | NAME     |
++----+----------+
+|  1 | Author-A |
+|  2 | Author-B |
+|  3 | Author-C |
+| 10 | Author-D |
+| 12 | Author-E |
++----+----------+
+5 rows in set (0.00 sec)
+
+mysql> SELECT * FROM AUTHORS INNER JOIN BOOKS ON AUTHORS.ID=BOOKS.AUTHORID;
++----+----------+----+--------+-------+------------+----------+
+| ID | NAME     | ID | NAME   | PRICE | CATEGORYID | AUTHORID |
++----+----------+----+--------+-------+------------+----------+
+|  2 | Author-B |  1 | Book-A |   100 |          1 |        2 |
+|  2 | Author-B |  2 | Book-B |   200 |          2 |        2 |
+|  2 | Author-B |  3 | Book-C |   150 |          3 |        2 |
+|  1 | Author-A |  4 | Book-D |   100 |          3 |        1 |
+|  1 | Author-A |  5 | Book-E |   200 |          3 |        1 |
+|  1 | Author-A |  6 | Book-F |   150 |          4 |        1 |
++----+----------+----+--------+-------+------------+----------+
+6 rows in set (0.00 sec)
+
+mysql>  SELECT * FROM AUTHORS LEFT OUTER JOIN BOOKS ON AUTHORS.ID=BOOKS.AUTHORID;
++----+----------+------+--------+-------+------------+----------+
+| ID | NAME     | ID   | NAME   | PRICE | CATEGORYID | AUTHORID |
++----+----------+------+--------+-------+------------+----------+
+|  1 | Author-A |    6 | Book-F |   150 |          4 |        1 |
+|  1 | Author-A |    5 | Book-E |   200 |          3 |        1 |
+|  1 | Author-A |    4 | Book-D |   100 |          3 |        1 |
+|  2 | Author-B |    3 | Book-C |   150 |          3 |        2 |
+|  2 | Author-B |    2 | Book-B |   200 |          2 |        2 |
+|  2 | Author-B |    1 | Book-A |   100 |          1 |        2 |
+|  3 | Author-C | NULL | NULL   |  NULL |       NULL |     NULL |
+| 10 | Author-D | NULL | NULL   |  NULL |       NULL |     NULL |
+| 12 | Author-E | NULL | NULL   |  NULL |       NULL |     NULL |
++----+----------+------+--------+-------+------------+----------+
+9 rows in set (0.00 sec)
+
+mysql>  SELECT * FROM AUTHORS RIGHT OUTER JOIN BOOKS ON AUTHORS.ID=BOOKS.AUTHORID;
++------+----------+----+--------+-------+------------+----------+
+| ID   | NAME     | ID | NAME   | PRICE | CATEGORYID | AUTHORID |
++------+----------+----+--------+-------+------------+----------+
+|    2 | Author-B |  1 | Book-A |   100 |          1 |        2 |
+|    2 | Author-B |  2 | Book-B |   200 |          2 |        2 |
+|    2 | Author-B |  3 | Book-C |   150 |          3 |        2 |
+|    1 | Author-A |  4 | Book-D |   100 |          3 |        1 |
+|    1 | Author-A |  5 | Book-E |   200 |          3 |        1 |
+|    1 | Author-A |  6 | Book-F |   150 |          4 |        1 |
+| NULL | NULL     |  7 | Book-G |   100 |          5 |        5 |
+| NULL | NULL     |  8 | Book-H |   200 |          5 |        6 |
+| NULL | NULL     |  9 | Book-I |   150 |          7 |        8 |
++------+----------+----+--------+-------+------------+----------+
+9 rows in set (0.00 sec)
+
+mysql> SELECT * FROM AUTHORS LEFT JOIN BOOKS ON AUTHORS.ID=BOOKS.AUTHORID WHERE BOOKS.AUTHORID IS NULL;
++----+----------+------+------+-------+------------+----------+
+| ID | NAME     | ID   | NAME | PRICE | CATEGORYID | AUTHORID |
++----+----------+------+------+-------+------------+----------+
+|  3 | Author-C | NULL | NULL |  NULL |       NULL |     NULL |
+| 10 | Author-D | NULL | NULL |  NULL |       NULL |     NULL |
+| 12 | Author-E | NULL | NULL |  NULL |       NULL |     NULL |
++----+----------+------+------+-------+------------+----------+
+3 rows in set (0.00 sec)
+
+mysql> SELECT * FROM AUTHORS RIGHT JOIN BOOKS ON AUTHORS.ID=BOOKS.AUTHORID WHERE AUTHORS.ID IS NULL;
++------+------+----+--------+-------+------------+----------+
+| ID   | NAME | ID | NAME   | PRICE | CATEGORYID | AUTHORID |
++------+------+----+--------+-------+------------+----------+
+| NULL | NULL |  7 | Book-G |   100 |          5 |        5 |
+| NULL | NULL |  8 | Book-H |   200 |          5 |        6 |
+| NULL | NULL |  9 | Book-I |   150 |          7 |        8 |
++------+------+----+--------+-------+------------+----------+
+3 rows in set (0.00 sec)
+
+mysql> select * from AUTHORS left join BOOKS on AUTHORS.ID=BOOKS.AUTHORID where BOOKS.AUTHORID is null
+    ->  union all
+    ->  select * from AUTHORS right join BOOKS on AUTHORS.ID=BOOKS.AUTHORID where AUTHORS.ID is null;
++------+----------+------+--------+-------+------------+----------+
+| ID   | NAME     | ID   | NAME   | PRICE | CATEGORYID | AUTHORID |
++------+----------+------+--------+-------+------------+----------+
+|    3 | Author-C | NULL | NULL   |  NULL |       NULL |     NULL |
+|   10 | Author-D | NULL | NULL   |  NULL |       NULL |     NULL |
+|   12 | Author-E | NULL | NULL   |  NULL |       NULL |     NULL |
+| NULL | NULL     |    7 | Book-G |   100 |          5 |        5 |
+| NULL | NULL     |    8 | Book-H |   200 |          5 |        6 |
+| NULL | NULL     |    9 | Book-I |   150 |          7 |        8 |
++------+----------+------+--------+-------+------------+----------+
+6 rows in set (0.00 sec)
+
+mysql>  select *  from AUTHORSINNER join BOOKS on AUTHORS.ID=BOOKS.AUTHORID; 
+ERROR 1146 (42S02): Table 'donovanflores17$Join.AUTHORSINNER' doesn't exist
+mysql> select * from AUTHORS INNER join BOOKS on AUTHORS.ID=BOOKS.AUTHORID;
++----+----------+----+--------+-------+------------+----------+
+| ID | NAME     | ID | NAME   | PRICE | CATEGORYID | AUTHORID |
++----+----------+----+--------+-------+------------+----------+
+|  2 | Author-B |  1 | Book-A |   100 |          1 |        2 |
+|  2 | Author-B |  2 | Book-B |   200 |          2 |        2 |
+|  2 | Author-B |  3 | Book-C |   150 |          3 |        2 |
+|  1 | Author-A |  4 | Book-D |   100 |          3 |        1 |
+|  1 | Author-A |  5 | Book-E |   200 |          3 |        1 |
+|  1 | Author-A |  6 | Book-F |   150 |          4 |        1 |
++----+----------+----+--------+-------+------------+----------+
+6 rows in set (0.00 sec)
+
+mysql>  select *  from AUTHORS INNER join BOOKS  on AUTHORS.ID=BOOKS.AUTHORID;
++----+----------+----+--------+-------+------------+----------+
+| ID | NAME     | ID | NAME   | PRICE | CATEGORYID | AUTHORID |
++----+----------+----+--------+-------+------------+----------+
+|  2 | Author-B |  1 | Book-A |   100 |          1 |        2 |
+|  2 | Author-B |  2 | Book-B |   200 |          2 |        2 |
+|  2 | Author-B |  3 | Book-C |   150 |          3 |        2 |
+|  1 | Author-A |  4 | Book-D |   100 |          3 |        1 |
+|  1 | Author-A |  5 | Book-E |   200 |          3 |        1 |
+|  1 | Author-A |  6 | Book-F |   150 |          4 |        1 |
++----+----------+----+--------+-------+------------+----------+
+6 rows in set (0.00 sec
