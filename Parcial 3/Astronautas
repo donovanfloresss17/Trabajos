@@ -1,0 +1,62 @@
+show databases;
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 2119423
+Server version: 8.0.40 Source distribution
+Copyright (c) 2000, 2022, Oracle and/or its affiliates.
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+mysql> show databases;
++-------------------------------+
+| Database                      |
++-------------------------------+
+| fernandoflores17$Agrupaciones |
+| fernandoflores17$Astronautas  |
+| fernandoflores17$default      |
+| information_schema            |
+| performance_schema            |
++-------------------------------+
+5 rows in set (0.44 sec)
+mysql> use fernandoflores17$Astronautas;
+Database changed
+mysql> CREATE TABLE Astronauta (
+    ->     Id INT NOT NULL,
+    ->     Trabajo VARCHAR(16) NOT NULL,
+    ->     Misiones INT NOT NULL,
+    ->     PRIMARY KEY(Id, Misiones)
+    -> );
+Query OK, 0 rows affected (0.08 sec)
+mysql> 
+mysql> 
+mysql> Insert Into Astronauta Values
+    -> (1, 'Navegador', 6),
+    -> (2, 'Navegador', 12),
+    -> (3, 'Navegador', 17),
+    -> (4, 'Geólogo', 21),
+    -> (5, 'Geólogo', 9),
+    -> (6, 'Geólogo', 8),
+    -> (7, 'Técnico', 13),
+    -> (8, 'Técnico', 2),
+    -> (9, 'Técnico', 7);
+Query OK, 9 rows affected (0.01 sec)
+Records: 9  Duplicates: 0  Warnings: 0
+
+mysql> 
+mysql> 
+mysql> SELECT Trabajo,
+    ->   (SELECT Id FROM Astronauta a2 WHERE a2.Trabajo = a1.Trabajo ORDER BY Misiones DESC LIMIT 1) AS `Experimentados`,
+    ->   (SELECT Id FROM Astronauta a2 WHERE a2.Trabajo = a1.Trabajo ORDER BY Misiones ASC LIMIT 1) AS `Menos Experimentados`
+    -> FROM 
+    ->   Astronauta a1
+    -> GROUP BY 
+    ->   Trabajo;
++-----------+----------------+----------------------+
+| Trabajo   | Experimentados | Menos Experimentados |
++-----------+----------------+----------------------+
+| Navegador |              3 |                    1 |
+| Geólogo   |              4 |                    6 |
+| Técnico   |              7 |                    8 |
++-----------+----------------+----------------------+
+3 rows in set (0.00 sec)
+mysql> 
